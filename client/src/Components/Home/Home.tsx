@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { emailRegex, passwordRegex } from "../../Utils/RegEx";
+import { API_BASE_URL } from "../../Utils/api";
 import Loader from "../Loader.tsx/Loader";
 
 
@@ -40,7 +41,7 @@ function Home() {
   const getUser = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_SERVER_URL}/user/`,
+        `${API_BASE_URL}/user/`,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -111,7 +112,7 @@ function Home() {
     try {
       setisloading(true);
       const response = await axios.put(
-        `${import.meta.env.VITE_BASE_SERVER_URL}/user/updateUser`,
+        `${API_BASE_URL}/user/updateUser`,
         { type, newUserData },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

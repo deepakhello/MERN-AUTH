@@ -5,6 +5,7 @@ import styles from "./Signup.module.css";
 import { emailRegex, passwordRegex } from '../../Utils/RegEx';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import { API_BASE_URL } from '../../Utils/api';
 
 function Signup() {
 
@@ -40,7 +41,7 @@ function Signup() {
       return;
     }
      try {
-      const response = await axios.post(`${import.meta.env.VITE_BASE_SERVER_URL}/user/register`, userDetails);
+      const response = await axios.post(`${API_BASE_URL}/user/register`, userDetails);
       toast.success(response.data.message);
       console.log(response);
       setuserDetails({username: "", email: "", password: ""});

@@ -4,6 +4,7 @@ import styles from "./ForgotPassword.module.css";
 import { emailRegex, passwordRegex } from "../../Utils/RegEx";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { API_BASE_URL } from "../../Utils/api";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../Loader.tsx/Loader";
 
@@ -48,7 +49,7 @@ const PasswordComponent = () => {
       setisloading(true);
       const email = localStorage.getItem("email");
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_SERVER_URL}/user/resetPassword`,
+        `${API_BASE_URL}/user/resetPassword`,
         { email, password: newPassword, isOTPVerified: true }
       );
 
@@ -95,7 +96,7 @@ const EmailComponent = ({ setstep }: { setstep: (step: number) => void }) => {
     try {
       setisloading(true);
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_SERVER_URL}/user/resetPassword`,
+        `${API_BASE_URL}/user/resetPassword`,
         { email }
       );
 
@@ -140,7 +141,7 @@ const OTPComponent = ({ setstep }: { setstep: (step: number) => void }) => {
     try {
       setisloading(true);
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_SERVER_URL}/user/verifyPasswordOTP`,
+        `${API_BASE_URL}/user/verifyPasswordOTP`,
         { OTP }
       );
 

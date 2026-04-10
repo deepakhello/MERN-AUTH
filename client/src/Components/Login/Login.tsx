@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { emailRegex, passwordRegex } from "../../Utils/RegEx";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { API_BASE_URL } from "../../Utils/api";
 import {
   GoogleLoginButton,
 } from "react-social-login-buttons";
@@ -57,7 +58,7 @@ function Login() {
     try {
       setisloading(true);
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_SERVER_URL}/user/login`,
+        `${API_BASE_URL}/user/login`,
         userDetails
       );
       console.log(response);
@@ -97,7 +98,7 @@ function Login() {
 
       try {
         const response = await axios.post(
-          `${import.meta.env.VITE_BASE_SERVER_URL}/user/login`,
+          `${API_BASE_URL}/user/login`,
           newUser
         );
         console.log(response);
