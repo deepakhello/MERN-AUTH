@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
+
 
 const UserSchema = new mongoose.Schema({
 
@@ -24,6 +25,7 @@ const UserSchema = new mongoose.Schema({
         token: String,
         expires: Date
     }
+
 })
 
 const UserModel = mongoose.model('Users', UserSchema)

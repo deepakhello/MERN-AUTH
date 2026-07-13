@@ -45,8 +45,7 @@ const register = async (req, res) => {
         await newUser.save()
 
 
-        const emailBody = `<p>Please click on the link to verify your account. <b>https://mern-auth-v4lx.onrender.com/user/verify/${verficationToken}</b></p>`
-
+        const emailBody = `<p>Please click on the link to verify your account. <b>http://localhost:3000/user/verify/${verficationToken}</b></p>`;
         const subject = `Verification Email`
 
         await sendEmail(req.body.email, subject, emailBody)
@@ -101,7 +100,7 @@ const login = async (req, res) => {
 
                 const token = jwt.sign(jwtPayload, process.env.SECRET, { expiresIn: '10m' })
 
-                const emailBody = `<p>Account Created Successfully. Your password is <b>${password}</b> <br> Please Change it. </p>`
+                const emailBody = `<p>Account Created Successfully. Your password is <b>${password}<b> <br> Please Change it. </p>`
 
                 const subject = `Account Created VIA Social`
 

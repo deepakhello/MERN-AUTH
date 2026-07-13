@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
@@ -15,13 +16,20 @@ app.use(morgan('dev'));
 app.use('/user', require('./User Routes/User Routes'));
 
 const clientBuildPath = path.join(__dirname, '../client/dist');
+const indexHtmlPath = path.join(clientBuildPath, 'index.html');
 
-if (process.env.NODE_ENV === 'production') {
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('Client build path:', clientBuildPath);
+console.log('Client index exists:', fs.existsSync(indexHtmlPath));``
+
+if (process.env.NODE_ENV === 'production' && fs.existsSync(indexHtmlPath)) {
+  console.log('Serving client build from:', clientBuildPath);
   app.use(express.static(clientBuildPath));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(clientBuildPath, 'index.html'));
+  app.get(/.*/, (req, res) => {
+    res.sendFile(indexHtmlPath);
   });
 } else {
+  console.log('Client build not served, API only mode');
   app.get('/', (req, res) => {
     res.send('API is running');
   });
